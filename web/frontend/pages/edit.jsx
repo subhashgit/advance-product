@@ -1,6 +1,6 @@
 import { Page, Layout,Card } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
-import { QRCodeForm } from "../components";
+import { EditForm } from "../components";
 import { useLocation } from "react-router-dom";
 export default function ManageCode() {
   const product = useLocation().search;
@@ -14,7 +14,7 @@ export default function ManageCode() {
         primaryAction={null}
       />
     
-      <QRCodeForm />
+      <EditForm />
     </Page>
   );
 }

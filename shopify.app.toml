@@ -2,7 +2,7 @@
 
 name = "product-advance-options"
 client_id = "66b7df45b4b7d570e453b6c19c84d024"
-application_url = "https://magic-thereafter-machinery-goat.trycloudflare.com"
+application_url = "https://rebound-days-hardwood-closest.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_discounts"
 
 [auth]
 redirect_urls = [
-  "https://magic-thereafter-machinery-goat.trycloudflare.com/auth/callback",
-  "https://magic-thereafter-machinery-goat.trycloudflare.com/auth/shopify/callback",
-  "https://magic-thereafter-machinery-goat.trycloudflare.com/api/auth/callback"
+  "https://rebound-days-hardwood-closest.trycloudflare.com/auth/callback",
+  "https://rebound-days-hardwood-closest.trycloudflare.com/auth/shopify/callback",
+  "https://rebound-days-hardwood-closest.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
