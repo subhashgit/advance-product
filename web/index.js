@@ -98,32 +98,14 @@ app.get("/api/products/metafield/:id", async( req, res) => {
   let error = null
 
   try {
-  
+
     const session = res.locals.shopify.session
     const client = new shopify.api.clients.Graphql({session});
     await client.query({
-      data: `mutation  {
-        bulkOperationRunQuery(
-         query: """
-          {
-            products {
-              edges {
-                node {
-                  id
-                  title
-                }
-              }
-            }
-          }
-          """
-        ) {
-          bulkOperation {
-            id
-            status
-          }
-          userErrors {
-            field
-            message
+      data: `query {
+      product(id: "gid://shopify/Product/${req.params.id}") {
+          metafield(namespace: "advanceapp", key: "iscustomnumber") {
+            value
           }
         }
       }`
@@ -134,8 +116,8 @@ app.get("/api/products/metafield/:id", async( req, res) => {
     status = 500
     error =  err.message
   }
-  const reqs = req.body.uploadval;
-  res.status(status).send({ sucess: status === 200, error, other: reqs });
+  const reqs = req.params.id;
+  res.status(status).send({ sucess: status === 200, error });
   
   
 });

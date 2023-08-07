@@ -2,7 +2,7 @@
 
 name = "product-advance-options"
 client_id = "66b7df45b4b7d570e453b6c19c84d024"
-application_url = "https://rebound-days-hardwood-closest.trycloudflare.com"
+application_url = "https://casinos-mpegs-jon-haven.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_discounts"
 
 [auth]
 redirect_urls = [
-  "https://rebound-days-hardwood-closest.trycloudflare.com/auth/callback",
-  "https://rebound-days-hardwood-closest.trycloudflare.com/auth/shopify/callback",
-  "https://rebound-days-hardwood-closest.trycloudflare.com/api/auth/callback"
+  "https://casinos-mpegs-jon-haven.trycloudflare.com/auth/callback",
+  "https://casinos-mpegs-jon-haven.trycloudflare.com/auth/shopify/callback",
+  "https://casinos-mpegs-jon-haven.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

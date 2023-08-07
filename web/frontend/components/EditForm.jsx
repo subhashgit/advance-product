@@ -74,15 +74,35 @@ const[enabledesignnamespace,setdesignnamespace ] = useState([]);
     const handlegetField = async () => {
 
       try {
-          const response = await fetch("/api/products/metafields/"+productid, {
+          const responsed = await fetch("/api/products/metafields/"+productid, {
             id: productid,
             post:"get"
         })
-         //  await console.log(response.json());
-           const getresponsedata = await response.json();
+         //  await console.log(responsed.json());
            
-            setdesignnamespace(getresponsedata);
+         const getresponsedata = await responsed.json();
+           
+         //  setdesignnamespace(getresponsedata);
           
+ const data = getresponsedata.data; 
+ console.log(getresponsedata);
+ const resultupload = data.find(num => num.namespace === "advanceapp" && num.key === "isenableupload" );
+  const resultcustomNumber = data.find(num => num.namespace === "advanceapp" && num.key === "iscustomnumber" );
+  const resultcustomName = data.find(num => num.namespace === "advanceapp" && num.key === "iscustomname" );
+ 
+  if(resultupload){
+  setcustomDesign(resultupload.value);
+  setcustomDesignid(resultupload.id); 
+ }
+ if(resultcustomNumber){
+   setcustomNumber(resultcustomNumber.value);
+   setcustomnumberid(resultcustomNumber.id); 
+ }
+ if(resultcustomName){
+   setcustomName(resultcustomName.value);
+   setcustomnameid(resultcustomName.id); 
+ }
+ 
            
     
       } catch(err){
@@ -163,27 +183,8 @@ try {
 
  }
 
- useEffect(()=> {
- const data = enabledesignnamespace.data;
-if(enabledesignnamespace.length != 0){ 
- const resultupload = data.find(num => num.namespace === "advanceapp" && num.key === "isenableupload" );
- const resultcustomNumber = data.find(num => num.namespace === "advanceapp" && num.key === "iscustomnumber" );
- const resultcustomName = data.find(num => num.namespace === "advanceapp" && num.key === "iscustomname" );
-if(resultupload){
- setcustomDesign(resultupload.value);
- setcustomDesignid(resultupload.id); 
-}
-if(resultcustomNumber){
-  setcustomNumber(resultcustomNumber.value);
-  setcustomnumberid(resultcustomNumber.id); 
-}
-if(resultcustomName){
-  setcustomName(resultcustomName.value);
-  setcustomnameid(resultcustomName.id); 
-}
 
-}
-}, [])
+
   return (
     <Frame>
     <Page>
