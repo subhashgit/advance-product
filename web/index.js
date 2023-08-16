@@ -55,7 +55,20 @@ app.get("/api/products", async (req, res) => {
     console.log(err)
   }
 });
+app.get("/api/customer/:id", async (req, res) => {
+  try {
+    const session = res.locals.shopify.session
+    const data = await shopify.api.rest.Customer.find({
+      session: session,
+      id: req.params.id,
+    })
+    
+    res.status(200).send(data)
 
+  } catch(err) {
+    console.log(err)
+  }
+});
 
 
 app.get("/api/products/:id", async (req, res) => {

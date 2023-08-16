@@ -1,20 +1,16 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "product-advance-options"
-client_id = "66b7df45b4b7d570e453b6c19c84d024"
-application_url = "https://casinos-mpegs-jon-haven.trycloudflare.com"
+name = "Advanced App"
+client_id = "b143096dc8c4db0d8969aa7854b9e69a"
+application_url = "https://shopify.dev/apps/default-app-home"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,read_discounts"
+scopes = "write_products,read_discounts,read_customers,write_customers"
 
 [auth]
-redirect_urls = [
-  "https://casinos-mpegs-jon-haven.trycloudflare.com/auth/callback",
-  "https://casinos-mpegs-jon-haven.trycloudflare.com/auth/shopify/callback",
-  "https://casinos-mpegs-jon-haven.trycloudflare.com/api/auth/callback"
-]
+redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
 
 [webhooks]
 api_version = "2023-07"
@@ -23,5 +19,4 @@ api_version = "2023-07"
 embedded = false
 
 [build]
-automatically_update_urls_on_dev = true
 dev_store_url = "developer-1001.myshopify.com"
