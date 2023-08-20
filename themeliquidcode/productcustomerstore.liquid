@@ -1,0 +1,53 @@
+{%- assign page_url = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split: request.host | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&'  -%}
+
+{%- for i in (1..1) -%}
+  {%- unless page_url contains "?" -%}{% break %}{%- endunless -%}
+  {%- assign query_string = page_url | split:'?' | last -%}
+  {%- assign qry_parts= query_string | split:'&' -%}
+
+  {%- for part in qry_parts -%}
+    {%- assign key_and_value = part | split:'=' -%}
+    
+    {%- if key_and_value.size > 1 -%}
+      {% if key_and_value[0] == 'storeid' %}
+        {% assign storeid = key_and_value[1] %}
+              {% elsif key_and_value[0] == 'assign' %}
+        {% assign customerids = key_and_value[1] %}
+        
+      {% endif %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+ 
+{% if product.metafields.teamstorevisivility.[customerids] == 'true' %}
+
+    {{  product.metafields.teamstoreproducts.[customerids] }}
+
+  {% assign products = product.metafields.teamstoreproducts.[customerids] | split: ", " %}
+       <div class="grid__item">
+              <div class="grid grid--uniform">
+
+      {% for product in products %}
+        {% assign prod = all_products[product] %}
+         <div class="grid__item medium-up--one-third">
+             {% include 'product-card-item',  product: prod, products_per_row: 3 %}
+         </div>
+      {% endfor %} 
+              </div>
+ </div>
+ 
+{% else %}
+  Your Store is Disabled, Please connect with admin
+{% endif %}
+
+
+
+
+
+
+<style>
+  .list-view-item__image.product-card__image{height:auto !important;}
+  .product-item--info{padding:15px;}
+</style>
+     
+   

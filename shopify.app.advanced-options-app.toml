@@ -2,7 +2,7 @@
 
 name = "Advanced Options App"
 client_id = "bea5a571c967a3e11260986287ff075d"
-application_url = "https://silk-laid-jews-sharon.trycloudflare.com"
+application_url = "https://begins-enclosure-jerry-activation.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_discounts,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://silk-laid-jews-sharon.trycloudflare.com/auth/callback",
-  "https://silk-laid-jews-sharon.trycloudflare.com/auth/shopify/callback",
-  "https://silk-laid-jews-sharon.trycloudflare.com/api/auth/callback"
+  "https://begins-enclosure-jerry-activation.trycloudflare.com/auth/callback",
+  "https://begins-enclosure-jerry-activation.trycloudflare.com/auth/shopify/callback",
+  "https://begins-enclosure-jerry-activation.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -33,8 +33,6 @@ export  function TeamStoreList() {
  
 const handleapro = async () => {
 //  setActive(true);  
-alert();
-return;
 
       try {
           const response = await fetch("/api/customer/update/"+customerid,{
@@ -45,10 +43,7 @@ return;
             },
               body: 
                 JSON.stringify({ 
-                  id:productid,
-                designval: customDesign,
-                nameval:customName,
-                numberval:customNumber
+                  id:customerid
           })
              
               
@@ -73,7 +68,6 @@ return;
          <div style={{padding:15,position:'relative'}}>  
           <p style={{marginBottom:15}}> <b>{newlatestuser.first_name} ({newlatestuser.email}) </b>   Request for Team store</p>
            <Button primary size="slim" onClick={handleapro}>Aprove</Button> 
-           <Button danger size="slim" onClick={handleapro}>Cancel</Button>
            </div>
        
     </Card>

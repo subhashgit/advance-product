@@ -35,14 +35,15 @@ export default function HomePage() {
           <p>
             Add products Advanced Options
           </p>
+          
           <p>
           <Button url="https://admin.shopify.com/store/big-league-shirts/products" primary>Add Advance Options Editing</Button>
           </p>
-         {/**
+         
           <p style={{marginTop:15}}>
-          <Button onClick= {() => {navigate("/teamstorerequest")}} primary>Team Store Request</Button>
+          <Button url="https://admin.shopify.com/store/big-league-shirts/customers" primary>Add Customers Edit</Button>
           </p>
- */}
+ 
           </EmptyState>
       </Card>
         </Layout.Section>
