@@ -36,11 +36,11 @@ export  function TeamStoreEdit() {
   const[uniquurl,setuniqurl] = useState('');
   const [teamcustomer, setteamcustomer] = useState('false');
   const [teamcustomerid, setteamcustomerid] = useState('');
-  const [producthandles, setproducthandles] = useState([]);
   const [producthandlesid, setproducthandlesid] = useState('');
   const [shoplink, setshoplink] = useState('');
   const [storelink, setstorelink] = useState('');
-const[getshopdata,setgetshopdata] = useState('appdev-101.myshopify.com');
+  const [storelinkid, setstorelinkid] = useState('');
+  const[getshopdata,setgetshopdata] = useState('bigleagueshirts.com');
   const fetch = useAuthenticatedFetch();
   const [productids, setproductids] = useState([]);  
   const [selectedproducts, setselectedproducts] = useState('');  
@@ -48,13 +48,11 @@ const[getshopdata,setgetshopdata] = useState('appdev-101.myshopify.com');
   const [showResourcePicker, setShowResourcePicker] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
-  
-
-
   const toggleResourcePicker = useCallback(
    () => setShowResourcePicker(!showResourcePicker),
    [showResourcePicker]
  );
+ const date = new Date();
 
  const [active, setActive] = useState(false);
 const toggleActive = useCallback(() => setActive((active) => !active), []);
@@ -62,16 +60,26 @@ const toastMarkup = active ? (
   <Toast content="Saved" onDismiss={toggleActive} duration={4500}/>
 ) : null;
 
+  const [producthandles, setproducthandles] = useState([]);
+  
+  const removeTag = useCallback(
+    (tag) => () => {
 
- const handleProductChange = useCallback(({ selection }) => {
-   
-   setSelectedProduct(selection);
-   console.log(selection);
-   setShowResourcePicker(false);
- }, []);
+      setproducthandles((previousTags) =>
+        previousTags.filter((previousTag) => previousTag !== tag),
+      );
+    },
+    [],
+  );
+
+  
+
+
 
 
 const pageid = 8008745091322;
+//const pageid = 8557278953756;
+
   useEffect(()=> {
     
     const fetchData =  async () => {
@@ -96,7 +104,7 @@ const pageid = 8008745091322;
           console.log(err);
       }
   }
-
+  setuniqurl(date.getTime()+customerid);
    fetchData();      
    fetchShop();
   },[])
@@ -119,11 +127,11 @@ useEffect(()=> {
        //  setdesignnamespace(getresponsedata);
         
 const data = getresponsedata.data; 
-
+if(data){
 const resultisisenable = data.find(num => num.namespace === "teamstorevisivility" && num.key === customerid );
 const resultcustomproducts = data.find(num => num.namespace === "teamstoreproducts" && num.key === customerid );
 const resultstorelink = data.find(num => num.namespace === "teamstorelink" && num.key === customerid );
-
+    
 
 if(resultisisenable){
   setteamcustomer(resultisisenable.value);
@@ -140,11 +148,11 @@ if(resultcustomproducts){
 }
 
 if(resultstorelink){
-  
+  setuniqurl(resultstorelink.value);
   setstorelink('https://'+getshopdata+'/products/team-store?storeid='+resultstorelink.value+'&assign='+customerid)
 
 }
-  
+}
     } catch(err){
         console.log(err)
     }
@@ -155,22 +163,26 @@ if(resultstorelink){
 
 /**endgetmeta */
 
-const getselectedproducts  = useCallback(({ selection }) => {
+const getselectedproducts  = useCallback(({ selection }) => { 
 
 const textarray = [];
 for ( let i = 0; i < selection.length; i++) { 
   const csvLine = (selection[i].handle);
   textarray.push(csvLine)
-  
-}
-if(producthandles){
-  setproducthandles([...producthandles,...textarray]);
-}
-else{
-  setproducthandles(textarray);
 }
 
-console.log(producthandles);
+const children = producthandles.concat(producthandles, textarray); 
+
+
+function removeDuplicates(arr) {
+    return arr.filter((item,
+      index) => arr.indexOf(item) === index);
+    }
+     const getremo = removeDuplicates(children);
+   setproducthandles(getremo);
+
+
+
 
 //setselectedproducts(textarray.join(', '));
 
@@ -182,38 +194,9 @@ console.log(producthandles);
 
 const handleapro = async() => {
 
-  const date = new Date();
-   const uniquurl = date.getTime()+customerid+'teamstore';
-    setshoplink('https://'+getshopdata+'/products/team-store/?storeid='+date.getTime()+customerid+'&assign='+customerid)
-
-   
-    const producthandleonred = [];
-    if(selectedproducts != '' && producthandles != ''){
-      const producthandleonredv = selectedproducts+', '+producthandles;
-      producthandleonred.push(producthandleonredv);
-    }
-    else if(selectedproducts == '' && producthandles != '' ){
-      const producthandleonredv = producthandles;
-      producthandleonred.push(producthandleonredv);
-    }
-    else{
-      const producthandleonredv = selectedproducts;
-      producthandleonred.push(producthandleonredv);
-    }
-
- 
-function removeDuplicates(arr) {
-return arr.filter((item,
-  index) => arr.indexOf(item) === index);
-}
-  const getremo = removeDuplicates(producthandleonred);
-
-  console.log(getremo);
-  
-
-const finalpro = getremo.toString();
-
-
+  setshoplink('https://'+getshopdata+'/products/team-store/?storeid='+uniquurl+'&assign='+customerid);   
+//console.log(uniquurl);
+//return;
       try {
           const response = await fetch("/api/customer/update/"+pageid,{
               method:"put",
@@ -227,7 +210,7 @@ const finalpro = getremo.toString();
                   customerid:customerid,
                   isenable:teamcustomer,
                   stlink:uniquurl,
-                  products:finalpro
+                  products:producthandles.join(', ')
           })
                            
      })
@@ -245,11 +228,11 @@ const finalpro = getremo.toString();
 }
 
 
-
+/*
 const removeTag = useCallback((tagv) => () => {
 const index = producthandles.indexOf(tagv);
-if (index > -1) { // only splice array when item is found
-  producthandles.splice(index, 1); // 2nd parameter means remove one item only
+if (index > -1) { 
+  producthandles.splice(index, 1); 
 }
 console.log(producthandles);
 
@@ -258,6 +241,7 @@ setproducthandles(producthandles);
   },
   [],
 );
+*/
 
 const tagMarkup = producthandles.map((option) => (
   <Tag key={option} onRemove={removeTag(option)} >
@@ -273,8 +257,8 @@ const tagMarkup = producthandles.map((option) => (
       <Form onSubmit={handleapro}>
             
             <FormLayout>
-      <p style={{marginBottom:15}}> <b>{newlatestuser.first_name} ({newlatestuser.email}) </b>   Request for Team store</p>
-      
+      <h3 style={{marginBottom:15,fontSize:20}}> <b>{newlatestuser.email} </b>    Team store</h3>
+    
         <RadioButton
              label="Enable"
              id="trues"
