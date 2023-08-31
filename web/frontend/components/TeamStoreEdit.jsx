@@ -149,7 +149,7 @@ if(resultcustomproducts){
 
 if(resultstorelink){
   setuniqurl(resultstorelink.value);
-  setstorelink('https://'+getshopdata+'/products/team-store?storeid='+resultstorelink.value+'&assign='+customerid)
+  setstorelink('https://'+getshopdata+'/products/team-store?storeid='+customerid)
 
 }
 }
@@ -194,7 +194,7 @@ function removeDuplicates(arr) {
 
 const handleapro = async() => {
 
-  setshoplink('https://'+getshopdata+'/products/team-store/?storeid='+uniquurl+'&assign='+customerid);   
+  setshoplink('https://'+getshopdata+'/products/team-store/?storeid='+customerid);   
 //console.log(uniquurl);
 //return;
       try {

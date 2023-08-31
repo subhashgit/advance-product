@@ -37,9 +37,8 @@ export function EditForm() {
 const [producttitle, setproducttitle] = useState();
 const [productimage, setproductimage] = useState('placeholder');
 const [customDesign, setcustomDesign] = useState('false');
-const [customDesignid, setcustomDesignid] = useState('');
-const [customnumberid, setcustomnumberid] = useState('');
-const [customnameid, setcustomnameid] = useState('');
+
+
 
 const [customNumber, setcustomNumber] = useState('false');
 const [customName, setcustomName] = useState('false');
@@ -85,25 +84,24 @@ const[enabledesignnamespace,setdesignnamespace ] = useState([]);
          //  setdesignnamespace(getresponsedata);
           
  const data = getresponsedata.data; 
- console.log(getresponsedata);
+ //console.log(getresponsedata);
  const resultupload = data.find(num => num.namespace === "advanceapp" && num.key === "isenableupload" );
   const resultcustomNumber = data.find(num => num.namespace === "advanceapp" && num.key === "iscustomnumber" );
   const resultcustomName = data.find(num => num.namespace === "advanceapp" && num.key === "iscustomname" );
- 
+  
+  
+  
+
   if(resultupload){
   setcustomDesign(resultupload.value);
-  setcustomDesignid(resultupload.id); 
  }
  if(resultcustomNumber){
    setcustomNumber(resultcustomNumber.value);
-   setcustomnumberid(resultcustomNumber.id); 
  }
  if(resultcustomName){
    setcustomName(resultcustomName.value);
-   setcustomnameid(resultcustomName.id); 
  }
- 
-           
+
     
       } catch(err){
           console.log(err)
@@ -123,7 +121,7 @@ const[enabledesignnamespace,setdesignnamespace ] = useState([]);
 
   
   const handleSubmit = async () => {
-setActive(true);
+
 
     try {
         const response = await fetch("/api/products/update/"+productid,{
@@ -143,6 +141,7 @@ setActive(true);
             
    })
          await console.log(response.json());
+         setActive(true);
         
 
     } catch(err){
@@ -151,35 +150,6 @@ setActive(true);
 
 
 /**Metaupdate */
-
-try {
-  const response = await fetch("/api/products/metafields/update/"+productid,{
-      method:"put",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-      body: 
-        JSON.stringify({ 
-          id:productid,
-        designval: customDesign,
-        nameval:customName,
-        numberval:customNumber,
-        customsesignid:customDesignid,
-        customnumberid:customnumberid,
-        customnameid:customnameid
-  })
-     
-      
-})
-   await console.log(response.json());
-  
-
-} catch(err){
-  console.log(err)
-}
-
-
 
  }
 
@@ -283,14 +253,16 @@ try {
       <p   style={{marginTop:15}}>
 
 
-                                <Button submit primary >Save</Button>
+<Button submit primary >Save</Button>
 
-                                </p>            
+</p>              
                                
                                 
         
          
                         </Card>
+                      
+                        
             </FormLayout>
           </Form>
           {toastMarkup}
