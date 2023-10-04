@@ -104,7 +104,7 @@ const pageid = 8008745091322;
           console.log(err);
       }
   }
-  setuniqurl(date.getTime()+customerid);
+  setuniqurl(customerid);
    fetchData();      
    fetchShop();
   },[])
