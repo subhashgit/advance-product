@@ -39,7 +39,12 @@ export  function TeamStoreEdit() {
   const [producthandlesid, setproducthandlesid] = useState('');
   const [shoplink, setshoplink] = useState('');
   const [storelink, setstorelink] = useState('');
-  const [storelinkid, setstorelinkid] = useState('');
+  const [storename, setstorename] = useState('');
+  const handleStoreName = useCallback(
+    (newValue) => setstorename(newValue),
+    [],
+  );
+
   const[getshopdata,setgetshopdata] = useState('bigleagueshirts.com');
   const fetch = useAuthenticatedFetch();
   const [productids, setproductids] = useState([]);  
@@ -77,8 +82,8 @@ const toastMarkup = active ? (
 
 
 
-const pageid = 8008745091322;
-//const pageid = 8557278953756;
+//const pageid = 8008745091322;
+const pageid = 8557278953756;
 
   useEffect(()=> {
     
@@ -131,6 +136,7 @@ if(data){
 const resultisisenable = data.find(num => num.namespace === "teamstorevisivility" && num.key === customerid );
 const resultcustomproducts = data.find(num => num.namespace === "teamstoreproducts" && num.key === customerid );
 const resultstorelink = data.find(num => num.namespace === "teamstorelink" && num.key === customerid );
+const resultstorename = data.find(num => num.namespace === "teamstorename" && num.key === customerid );
     
 
 if(resultisisenable){
@@ -144,7 +150,6 @@ if(resultcustomproducts){
  temp = resultcustomproducts.value.split(",")
  setproducthandles(temp);
 
-
 }
 
 if(resultstorelink){
@@ -152,6 +157,12 @@ if(resultstorelink){
   setstorelink('https://'+getshopdata+'/products/team-store?storeid='+customerid)
 
 }
+
+if(resultstorename){
+  setstorename(resultstorename.value);
+}
+
+
 }
     } catch(err){
         console.log(err)
@@ -210,6 +221,7 @@ const handleapro = async() => {
                   customerid:customerid,
                   isenable:teamcustomer,
                   stlink:uniquurl,
+                  storename:storename,
                   products:producthandles.join(', ')
           })
                            
@@ -277,7 +289,21 @@ const tagMarkup = producthandles.map((option) => (
              onChange={() => setteamcustomer('false')} 
 
       />
-     
+     <Grid>
+  <Grid.Cell columnSpan={{xs: 10, sm: 10, md: 10, lg: 10, xl: 10}}>
+  <TextField
+   value={storename}
+   label="Store Name"
+   type="text"
+   onChange={handleStoreName}
+   autoComplete="off"
+ 
+  />
+
+
+
+  </Grid.Cell>
+</Grid>
  <Button onClick={toggleResourcePicker}>
                         Select product
                       </Button>

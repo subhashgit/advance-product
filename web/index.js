@@ -201,7 +201,15 @@ app.put("/api/customer/update/:id", async( req, res) => {
                 key: "${req.body.customerid}",
                 value: "${req.body.products}",
                 type: "single_line_text_field",
+              },
+              {
+                ownerId: "gid://shopify/Product/${req.params.id}",
+                namespace: "teamstorename",
+                key: "${req.body.customerid}",
+                value: "${req.body.storename}",
+                type: "single_line_text_field",
               }
+
             ]) {
               metafields {
                 key

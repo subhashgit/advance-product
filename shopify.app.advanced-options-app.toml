@@ -2,7 +2,7 @@
 
 name = "Advanced Options App"
 client_id = "bea5a571c967a3e11260986287ff075d"
-application_url = "https://brazil-bibliographic-accept-knights.trycloudflare.com"
+application_url = "https://free-drive-deviation-performer.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_discounts,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://brazil-bibliographic-accept-knights.trycloudflare.com/auth/callback",
-  "https://brazil-bibliographic-accept-knights.trycloudflare.com/auth/shopify/callback",
-  "https://brazil-bibliographic-accept-knights.trycloudflare.com/api/auth/callback"
+  "https://free-drive-deviation-performer.trycloudflare.com/auth/callback",
+  "https://free-drive-deviation-performer.trycloudflare.com/auth/shopify/callback",
+  "https://free-drive-deviation-performer.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
