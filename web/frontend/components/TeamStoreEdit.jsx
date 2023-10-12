@@ -154,7 +154,7 @@ if(resultcustomproducts){
 
 if(resultstorelink){
   setuniqurl(resultstorelink.value);
-  setstorelink('https://'+getshopdata+'/products/team-store?storeid='+customerid)
+  setstorelink('https://'+getshopdata+'/products/team-store?id='+customerid)
 
 }
 
@@ -205,7 +205,7 @@ function removeDuplicates(arr) {
 
 const handleapro = async() => {
 
-  setshoplink('https://'+getshopdata+'/products/team-store/?storeid='+customerid);   
+  setshoplink('https://'+getshopdata+'/products/team-store/?id='+customerid);   
 //console.log(uniquurl);
 //return;
       try {
